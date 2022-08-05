@@ -35,16 +35,3 @@ This function is the algorithmic part of my app. It is quite difficult to explai
  Next is the " /history " route. It is practical because it has a table that remembers the boards played. They are filtered for repetition and of course any previous board can be played again from that table
 
  The last route is the " /engine " route. I included the interesting code of my project and explained the functioning and the reasoning behind it.
-
- I put a lot of time and effort into this Boggle app, and I used a diversity of things, including :
-
- - Python
- - HTML
- - Javascript
- - CSS
- - Jinja
- - Flask
- - SQLite
- - Bootstrap
-
- Voila, this is Boggle !
