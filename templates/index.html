@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+
+
+{% block title %}
+    Index
+{% endblock %}
+
+
+
+{% block j %}
+    <script src="/static/index.js" type="module"></script>
+{% endblock %}
+
+
+
+{% block main %}
+    <div id="boggleb"></div>
+
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <pre class="helvetica">                    &uarr;</pre>
+        <pre class="helvetica">Type a letter chain or get a <span role="button" id="randomtext">random board</span> !</pre>
+        <pre class="helvetica">                                                 &uarr;</pre>
+    </div>
+
+    <div>
+        <form action="/" method="post" id="hidden-form"></form>
+    </div>
+
+{% endblock %}
+
+
+

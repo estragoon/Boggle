@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+
+
+{% block title %}
+    Boggle
+{% endblock %}
+
+
+
+{% block j %}
+    <script src="/static/boggle.js" type="module"></script>
+{% endblock %}
+
+
+
+{% block main %}
+    <div id="boggleb"></div>
+
+    <div class="my-5 flex-container-boggle">
+        {% for i in length | sort %}
+            <div class="mt-2">
+                <ul class="list-inline">
+
+                    <h3 class="helvetica fw-bold">{{ i }} Letter</h3>
+
+                    {% for item, array in dict.items() %}
+                        {% if item | length == i %}
+                            <li class="list-inline-item helvetica px-1" data-boxbool-list="{{ array|e }}" role="button">{{ item|e }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        <form action="/dictionary" method="post" id="hidden-form">
+            <input type="hidden" id="hidden-input" name="entry" value="">
+        </form>
+    </div>
+
+{% endblock %}
+
+

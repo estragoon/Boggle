@@ -1,0 +1,246 @@
+/* Flexbox */
+div .flex-container-boggle
+{
+    /* Enable flex properties */
+    display: flex;
+
+    /* Layout from top to bot */
+    flex-direction: column;
+
+    flex-wrap: nowrap;
+
+    /* Center flex-items */
+    justify-content: center;
+
+    /* Fill container horizontally */
+    align-items: flex-start;
+
+    /* Define minimum gutter for flex-items */
+    gap: 30px 30px;
+}
+
+
+
+/* Boggle brand font */
+nav .navbar-brand
+{
+    /* Google font */
+    font-family: 'Product Sans', sans-serif;
+
+    /* Larger than body */
+    font-size: xx-large;
+}
+
+
+
+/* Boggle brand colour from Google palette */
+nav .navbar-brand .blue
+{
+    color: #537FBE;
+}
+nav .navbar-brand .red
+{
+    color: #EA433B;
+}
+nav .navbar-brand .yellow
+{
+    color: #F5B82E;
+}
+nav .navbar-brand .green
+{
+    color: #2E944B;
+}
+
+
+
+/* Boggle board */
+div #boggleb
+{
+    /* Flex properties */
+    display: flex;
+
+    /* Layout from top to bot */
+    flex-direction: column;
+
+    /* Horizontally center flex-items */
+    align-items: center;
+
+}
+
+
+
+/* Boggle empty box */
+div .letter-box
+{
+    /* Box margin */
+    margin: 4px;
+
+    /* Box border */
+    border: 2px solid gray;
+
+    /* Box font */
+    font-family: 'Helvetica Neue', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.9rem;
+    font-weight: bold;
+
+    color: white;
+
+    /* Box area */
+    height: 4rem;
+    width: 4rem;
+
+    /* Box flex */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* Boggle fulll box */
+div .filled-box
+{
+    /* Box border */
+    border: 2px solid white;
+}
+
+
+
+/* Boggle line */
+div .letter-div
+{
+    /* Line flex */
+    display: flex;
+
+    /* Center flex-items */
+    justify-content: center;
+}
+
+
+
+/* Box pop cubic bezier */
+div .pop
+{
+    /* Linear cubic-bezier */
+    animation: pop 0.08s cubic-bezier(0.0, 0.0, 1.0, 1.0) 1;
+}
+
+
+
+/* Box pop transform */
+@keyframes pop
+{
+    /* Ctrl + C and Ctrl + V */
+    50%  {transform: scale(1.1);}
+}
+
+
+
+/* Helvetica font and big line */
+.helvetica
+{
+    font-family: 'Helvetica Neue', sans-serif;
+
+    line-height: 2;
+
+    border-radius: 4px;
+}
+pre.helvetica
+{
+    font-family: 'Helvetica Neue', sans-serif;
+
+    color: #B7B7B1;
+
+    margin: 0px !important;
+}
+
+
+
+/* Hidden Chrome bar */
+::-webkit-scrollbar
+{
+    display: none;
+}
+
+
+
+/* Colour palette for boxbool */
+div .path3, .path8, .path13
+{
+    background-color: #840C24;
+}
+div .path4, .path9, .path14
+{
+    background-color: #C38B0E;
+}
+div .path5, .path10, .path15
+{
+    background-color: #708238;
+}
+div .path6, .path11
+{
+    background-color: #779ECB;
+}
+div .path7, .path12
+{
+    background-color: #7851A9;
+}
+
+
+
+.form-control
+{
+    background-color: #212529;
+    border-style: solid;
+    border-color: #6C757D;
+}
+.form-control:focus
+{
+    background-color: #212529;
+    border-style: solid;
+    border-color: #FFFFFF;
+
+    color: #FFFFFF;
+
+    box-shadow: 0 0 0 0rem rgba(0, 0, 0, 1);
+}
+
+
+
+div .code
+{
+    background-color: #1E1E1E;
+    border-radius: 10px;
+
+    border: solid;
+    border-width: 1px;
+    border-color: #6C757D;
+
+    color: #B7B7B1;
+}
+
+
+
+.taj
+{
+    text-align: justify;
+}
+
+
+
+.orange
+{
+    color: #B2765E !important;
+}
+.green
+{
+    color: #5E782C !important;
+}
+
+
+
+button .hidden
+{
+    visibility: hidden;
+}

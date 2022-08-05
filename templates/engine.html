@@ -1,0 +1,256 @@
+{% extends "layout.html" %}
+
+
+
+{% block title %}
+    Engine
+{% endblock %}
+
+
+
+{% block main %}
+
+    <div class="my-5">
+
+        <p class="mb-5 lh-lg taj"><b>The Node object, the element of a trie</b>&nbsp&nbsp—&nbsp&nbspThe Node object holds a character (the Node.char method), an array of a boolean and an integer (the Node.end method) to indicate if the Node path up to here is an entry in the dictionary (the boolean), and, accordingly, the index of that entry in the dictionary (the integer), and a dictionary of Node children (the Node.child method) to continue the path.</p>
+
+        <div class="code my-3">
+        <pre><code>
+
+            class Node:
+
+                <span class="orange">""" A Node in a Trie """</span>
+
+                <span class="green"># Defining Node.method</span>
+                def __init__(self, char):
+
+                    <span class="green"># Defining Node.char</span>
+                    self.char = char
+
+                    <span class="green"># Defining Node.end</span>
+                    self.end = [False, 0]
+
+                    <span class="green"># Defining Node.child</span>
+                    self.child = {}
+
+        </code></pre>
+        </div>
+    </div>
+
+    <div class="my-5">
+
+        <p class="mb-5 lh-lg taj"><b>The Trie object, the tree for the dictionary</b>&nbsp&nbsp—&nbsp&nbspThe Trie has an empty root Node, and is built by adding dictionary entries (the Trie.add method). The Trie.find method can figure out if an input is the Trie (and, therefore, an entry in the dictionary), and the Trie.prefix method can figure out if the Trie (i.e. the dictionary) holds any larger path having that prefix.</p>
+
+        <div class="code my-3">
+        <pre><code>
+
+            class Trie:
+
+                <span class="orange">""" A Trie of Node """</span>
+
+                <span class="green"># Defining Trie.method</span>
+                def __init__(self):
+
+                    <span class="green"># Define Trie.root (empty Node)</span>
+                    self.root = Node('')
+
+                <span class="green"># Defining Trie.add(x)</span>
+                def add(self, x, c):
+
+                    <span class="green"># Begin at root Node</span>
+                    node = self.root
+
+                    <span class="green"># For each character in x</span>
+                    for char in x:
+
+                        if char in node.child:
+
+                            <span class="green"># If a Node exists, move to that Node</span>
+                            node = node.child[char]
+
+                        else:
+
+                            <span class="green"># If not, create a node for that character and move to that Node</span>
+                            tmp = Node(char)
+                            node.child[char] = tmp
+                            node = tmp
+
+                    <span class="green"># The end of the Node has Node.end = True</span>
+                    node.end = [True, c]
+
+                <span class="green"># Defining Trie.find(x)</span>
+                def find(self, x):
+
+                    <span class="green"># Begin at root Node</span>
+                    node = self.root
+
+                    <span class="green"># for each character in x</span>
+                    for char in x:
+
+                        if char in node.child:
+
+                            <span class="green"># If a Node exists, move to that Node</span>
+                            node = node.child[char]
+
+                        else:
+
+                            <span class="green"># If not, return False</span>
+                            return [False]
+
+                    <span class="green"># Return node.end</span>
+                    return node.end
+
+                <span class="green"># Defining Trie.prefix(prefix)</span>
+                def prefix(self, prefix):
+
+                    <span class="green"># Begin at root node</span>
+                    node = self.root
+
+                    <span class="green"># For each character in prefix</span>
+                    for char in prefix:
+
+                        if char in node.child:
+
+                            <span class="green"># If Node exists, move to that Node</span>
+                            node = node.child[char]
+
+                        else:
+
+                            <span class="green"># If not, return False</span>
+                            return False
+
+                    <span class="green"># If all Node have not empty Node.child, return True</span>
+                    return True
+
+        </code></pre>
+        </div>
+    </div>
+
+    <div class="my-5">
+
+        <p class="mb-5 lh-lg taj"><b>The boggle function, the algorithm for the Boggle</b>&nbsp&nbsp—&nbsp&nbspFrom the route for the boggle can the chain be extracted. Then, the boggle grid can be filled using floor division and modular arithmetic. Each element of the boxbool grid is initially a zero. The function is recursive, therefore it has a base case and a recursive case. The former are if the current path is a valid entry, if it has reached the maximum length of 16, or if no prefix of that path exist. If none are met, then the recursive case prolongs the path. The boxbool grid is updated to prevent a letter from being used again.</p>
+
+        <div class="code my-3">
+        <pre><code>
+
+            @app.route("/boggle/&lt;letterInput&gt;", methods=["GET"])
+
+                <span class="orange">""" Routing to the Boggle board """</span>
+
+                def boggle(letterInput):
+
+                    <span class="green"># Dict of entry</span>
+                    dict = {}
+
+                    <span class="green"># Unique lengths of entry in boggle</span>
+                    length = []
+
+                    <span class="green"># Boxbool grid</span>
+                    boxbool = [[0, 0, 0, 0],
+                               [0, 0, 0, 0],
+                               [0, 0, 0, 0],
+                               [0, 0, 0, 0]]
+
+                    <span class="green"># Boggle grid</span>
+                    boggleb = [['', '', '', ''],
+                               ['', '', '', ''],
+                               ['', '', '', ''],
+                               ['', '', '', '']]
+
+                    for i in range(len(letterInput)):
+
+                        <span class="green"># [i // 4] is col, [i % 4] is ro</span>
+                        boggleb[i // 4][i % 4] = list(letterInput)[i]
+
+                    for i in range(4):
+
+                        for j in range(4):
+
+                            boxbool[i][j] = 1
+                            buffer = boggleb[i][j]
+
+                            <span class="green"># Call calculateboggleb</span>
+                            calculateboggle(i, j, boggleb, boxbool, buffer, dict, t, length)
+
+                            fill(boxbool)
+
+                    return render_template("boggle.html", dict=dict, length=length)
+
+        </code></pre>
+        </div>
+        <div class="code my-3">
+            <pre><code>
+
+                def calculateboggle(i, j, boggleb, boxbool, buffer, dict, Trie, length):
+
+                    <span class="orange">""" Calculating a Boggle board """</span>
+
+                    if Trie.find(buffer)[0] and buffer not in dict and len(buffer) > 2:
+
+                        index = []
+
+                        <span class="green"># Get the index of a boxbool on '1'</span>
+                        for a in range(len(boxbool)):
+
+                            for b in range(len(boxbool[a])):
+
+                                if boxbool[a][b] == 1:
+
+                                    index.append((4 * a) + b)
+
+                        <span class="green"># If buffer valid, and not in already, add to dict</span>
+                        dict[buffer.title()] = index
+
+                        <span class="green"># add len(buffer) to length</span>
+                        if len(buffer) not in length:
+
+                            length.append(len(buffer))
+
+                    if Trie.prefix(buffer) == False:
+
+                        <span class="green"># If buffer not a valid prefix, return</span>
+                        return
+
+                    if len(buffer) == 16:
+
+                        <span class="green"># If boggle fully traversed, return</span>
+                        return
+
+                    for x in range(i - 1, i + 2):
+
+                        for y in range(j - 1, j + 2):
+
+                            <span class="green"># If neighbour in boggle and not traversed</span>
+                            if x &gt; -1 and x &lt; 4 and y &gt; -1 and y &lt; 4 and boxbool[x][y] == 0:
+
+                                <span class="green"># Add '1' to boxbool</span>
+                                boxbool[x][y] = 1
+
+                                <span class="green"># Run boggle</span>
+                                calculateboggle(x, y, boggleb, boxbool, buffer + boggleb[x][y], dict, Trie, length)
+
+                                <span class="green"># If boggle done, remove '1' from boxbool</span>
+                                boxbool[x][y] = 0
+
+            </code></pre>
+            </div>
+
+            <div class="my-5">
+
+                <p class="mb-5 lh-lg taj"><b>The RegEx, the filter for the dictionary</b>&nbsp&nbsp—&nbsp&nbspThe Regular Expression can filter the definition of an entry from the big input originally received. Because the input has a typical pattern, the RegEx defines the pattern and extracts only the definition from the input.</p>
+
+                <div class="code my-3">
+                <pre><code>
+
+                    <span class="orange">""" RegEx """"</span>
+
+                    /(?&lt;=[A-Z]{2}\n)(.+)/
+
+                </code></pre>
+                </div>
+            </div>
+    </div>
+
+{% endblock %}
+
+

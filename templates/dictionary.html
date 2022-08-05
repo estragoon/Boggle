@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+
+
+{% block title %}
+    Dictionary
+{% endblock %}
+
+
+
+{% block main %}
+
+    <div class="my-5 w-25 position-relative top-0 start-50 translate-middle">
+
+        <form  action="/dictionary" method="post">
+            <input autofocus autocomplete="off" type="text" name="entry" class="form-control" placeholder="Dictionary">
+            <input type="submit" hidden />
+        </form>
+
+    </div>
+
+    {% if entry %}
+        <div>
+            <h1 class="mt-5">{{ entry|upper|e }}</h1>
+            <p class="mt-5">{{ text|e }}</p>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+
